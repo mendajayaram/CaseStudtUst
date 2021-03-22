@@ -1,0 +1,43 @@
+server:
+  port: 9990
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: HrModule
+        uri: http://localhost:9991/
+        predicates:
+        - Path=/hr_welcome/**
+        filters:
+        - AddRequestHeader=first-request,first-request-header
+        - AddResponseHeader=first-response,first-response-header
+      - id: TesterModule
+        uri: http://localhost:9992/
+        predicates:
+        - Path=/tester_welcome/**
+        filters:
+        - AddRequestHeader=second-request,second-request-header
+        - AddResponseHeader=second-response,second-response-header
+      - id: DeveloperModule
+        uri: http://localhost:9993/
+        predicates:
+        - Path=/developer_welcome/**
+        filters:
+        - AddRequestHeader=second-request,second-request-header
+        - AddResponseHeader=second-response,second-response-header
+      - id: BArModule
+        uri: http://localhost:9994/
+        predicates:
+        - Path=/ba_welcome/**
+        filters:
+        - AddRequestHeader=second-request,second-request-header
+        - AddResponseHeader=second-response,second-response-header
+      - id: LoginModule
+        uri: http://localhost:9995/
+        predicates:
+        - Path=/login_welcome/**
+        filters:
+        - AddRequestHeader=second-request,second-request-header
+        - AddResponseHeader=second-response,second-response-header
+        

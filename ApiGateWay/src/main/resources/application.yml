@@ -1,0 +1,36 @@
+server:
+  port: 8085
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: CustomerModule
+        uri: http://localhost:8080/
+        predicates:
+        - Path=/customerDetails/**
+        filters:
+        - AddRequestHeader=first-request,first-request-header
+        - AddResponseHeader=first-response,first-response-header
+      - id: consumerModule
+        uri: http://localhost:8081/
+        predicates:
+        - Path=/CallDetails/**
+        filters:
+        - AddRequestHeader=second-request,second-request-header
+        - AddResponseHeader=second-response,second-response-header
+      - id: consumerModule
+        uri: http://localhost:8082/
+        predicates:
+        - Path=/familyDetails/**
+        filters:
+        - AddRequestHeader=second-request,second-request-header
+        - AddResponseHeader=second-response,second-response-header
+      - id: consumerModule
+        uri: http://localhost:8083/
+        predicates:
+        - Path=/planDetails/**
+        filters:
+        - AddRequestHeader=second-request,second-request-header
+        - AddResponseHeader=second-response,second-response-header
+        
